@@ -1,32 +1,29 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 
-class HistorySample extends Component {
-  handleGoBack = () => {
-    this.props.history.goBack();
+function HistorySample({ history }) {
+  const handleGoBack = () => {
+    history.goBack();
+  };
+  const handleGoHome = () => {
+    history.push("/");
   };
 
-  handleGoHome = () => {
-    this.props.history.push("/");
-  };
+  useEffect(() => {
+    const unblock = history.block("정말 떠나실 건가요?");
 
-  componentDidMount() {
-    this.unblock = this.props.history.block("정말 떠나실 건가요?");
-  }
+    return () => {
+      if (unblock) {
+        unblock();
+      }
+    };
+  }, [history]);
 
-  componentWillUnmount() {
-    if (this.unblock) {
-      this.unblock();
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.handleGoBack}>뒤로</button>
-        <button onClick={this.handleGoHome}>홈으로</button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <button onClick={handleGoBack}>뒤로</button>
+      <button onClick={handleGoHome}>홈으로</button>
+    </div>
+  );
 }
 
 export default HistorySample;
