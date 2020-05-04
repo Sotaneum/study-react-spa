@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Link, Route } from "react-router-dom";
+import Home from "./Home";
+import About from "./About";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ul>
+        <li>
+          <Link to="/">홈</Link>
+        </li>
+        <li>
+          <Link to="/about">소개</Link>
+        </li>
+      </ul>
+      <Route path="/" component={Home} exact={true} />
+      <Route path={["/about", "/info"]} component={About} />
     </div>
   );
 }
+
+/*
+v5 이전
+<Route path="/about" component={About} />
+<Route path="/info" component={About} />
+
+v5 이후
+<Route path={["/about", "/info"]} component={About} />
+ */
 
 export default App;
