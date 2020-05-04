@@ -22,8 +22,8 @@ class HistorySample extends Component {
   render() {
     return (
       <div>
-        <button click={this.handleGoBack}>뒤로</button>
-        <button click={this.handleGoHome}>홈으로</button>
+        <button onClick={this.handleGoBack}>뒤로</button>
+        <button onClick={this.handleGoHome}>홈으로</button>
       </div>
     );
   }
